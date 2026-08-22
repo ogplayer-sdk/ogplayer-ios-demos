@@ -1,0 +1,77 @@
+name: OGPlayerDemos
+options:
+  bundleIdPrefix: com.ogplayer
+  deploymentTarget:
+    iOS: "18.0"
+  createIntermediateGroups: true
+packages:
+  OGPlayer:
+    url: https://github.com/ogplayer-sdk/ogplayer-swift
+    from: 1.0.1
+targets:
+  OGPlayerDemos:
+    type: application
+    platform: iOS
+    sources:
+      - Sources
+      # The FreeWheel adapter ships with the SDK as source (SPM cannot build
+      # a target against the customer-licensed AdManager.framework); the
+      # demo compiles the canonical copy directly from the SDK repo.
+      - path: FreeWheelAdapter/FWAdsProvider.swift
+    dependencies:
+      - package: OGPlayer
+        product: OGPlayerCore
+      - package: OGPlayer
+        product: OGPlayerUI
+      - package: OGPlayer
+        product: OGPlayerAdsIMA
+    info:
+      path: Sources/Info.plist
+      properties:
+        UILaunchScreen: {}
+        CFBundleDisplayName: OGplayer Demos
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        NSAppTransportSecurity:
+          NSAllowsArbitraryLoads: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ogplayer.demos
+        IPHONEOS_DEPLOYMENT_TARGET: "18.0"
+        MARKETING_VERSION: "0.1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        GENERATE_INFOPLIST_FILE: NO
+        TARGETED_DEVICE_FAMILY: "1,2"
+        # Brand app icon: black ground, small OGPlayer mark centered
+        # (Assets.xcassets/AppIcon.appiconset, single 1024px universal).
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        # Physical-device testing (Ognjen's iPhone). Automatic signing.
+        # Device builds: select your team in Xcode, or regenerate with
+        #   DEVELOPMENT_TEAM=<your team id> xcodegen generate
+        DEVELOPMENT_TEAM: ${DEVELOPMENT_TEAM}
+        CODE_SIGN_STYLE: Automatic
+        # ---- FreeWheel (optional — bring your own SDK) -------------------
+        # FreeWheel's AdManager.framework is licensed to FreeWheel customers
+        # and NOT bundled with OGplayer. To run the FreeWheel demo: copy your
+        # AdManager.framework into PrivateFW/ (next to this file), uncomment
+        # the two settings below AND the "Embed FreeWheel" build phase, then
+        # run `xcodegen generate`. Device only — the framework ships no
+        # simulator slice; simulator builds compile the demo out either way.
+        # "FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]": "$(inherited) $(PROJECT_DIR)/PrivateFW"
+        # "OTHER_LDFLAGS[sdk=iphoneos*]": "$(inherited) -framework AdManager"
+    # postBuildScripts:
+    #   - name: Embed FreeWheel (device only)
+    #     shell: /bin/sh
+    #     script: |
+    #       if [ "$PLATFORM_NAME" = "iphoneos" ]; then
+    #         mkdir -p "$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH"
+    #         rsync -a --delete "$PROJECT_DIR/PrivateFW/AdManager.framework" \
+    #           "$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/"
+    #         if [ -n "$EXPANDED_CODE_SIGN_IDENTITY" ]; then
+    #           codesign --force --sign "$EXPANDED_CODE_SIGN_IDENTITY" \
+    #             --preserve-metadata=identifier,entitlements \
+    #             "$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/AdManager.framework"
+    #         fi
+    #       fi
