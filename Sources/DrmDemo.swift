@@ -26,6 +26,7 @@ struct DrmDemo: View {
 
     @StateObject private var player = OGPlayer()
     @StateObject private var log = EventLogState()
+    @StateObject private var rotation = DeviceRotation()
     @State private var stream: DrmStream = .open
     @State private var isFullscreen = false
     @State private var logger: EventLogger?
@@ -81,13 +82,18 @@ struct DrmDemo: View {
         .onChange(of: isFullscreen) { _, fs in
             OrientationLock.apply(fs ? .landscape : .portrait)
         }
+        // Physical rotation → enter/exit fullscreen.
+        .onChange(of: rotation.isLandscape) { _, landscape in
+            if landscape != isFullscreen { isFullscreen = landscape }
+        }
         .onChange(of: stream) { _, _ in reload() }
         .onAppear {
+            rotation.start()
             OrientationLock.apply(.all)
             if logger == nil { logger = attachEventLogging(player, to: log, includeProgress: false) }
             reload()
         }
-        .onDisappear { player.pause(); OrientationLock.apply(.portrait) }
+        .onDisappear { player.pause(); rotation.stop(); OrientationLock.apply(.portrait) }
     }
 
     /// Capsule scenario chip — same look as the ads demo's picker.

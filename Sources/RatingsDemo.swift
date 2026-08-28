@@ -9,6 +9,7 @@ import OGPlayerAdsIMA
 struct RatingsDemo: View {
     @StateObject private var player = OGPlayer()
     @StateObject private var log = EventLogState()
+    @StateObject private var rotation = DeviceRotation()
 
     @State private var isFullscreen = false
     @State private var age: ContentRating.Age = .sixteen
@@ -94,9 +95,14 @@ struct RatingsDemo: View {
         .statusBarHidden(isFullscreen)
         .persistentSystemOverlays(isFullscreen ? .hidden : .automatic)
         .onChange(of: isFullscreen) { _, fs in OrientationLock.apply(fs ? .landscape : .portrait) }
+        // Physical rotation → enter/exit fullscreen.
+        .onChange(of: rotation.isLandscape) { _, landscape in
+            if landscape != isFullscreen { isFullscreen = landscape }
+        }
         .onChange(of: ratings) { _, _ in reload() }
         .onChange(of: withPreroll) { _, _ in reload() }
         .onAppear {
+            rotation.start()
             OrientationLock.apply(.all)
             player.adsProvider = IMAAdsProvider()
             if loggers.isEmpty {
@@ -105,7 +111,7 @@ struct RatingsDemo: View {
             }
             reload()
         }
-        .onDisappear { player.pause(); OrientationLock.apply(.portrait) }
+        .onDisappear { player.pause(); rotation.stop(); OrientationLock.apply(.portrait) }
     }
 
     private func reload() {

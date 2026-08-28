@@ -82,6 +82,7 @@ struct OrientationDemo: View {
 struct LivePlayerDemo: View {
     @StateObject private var player = OGPlayer()
     @StateObject private var log = EventLogState()
+    @StateObject private var rotation = DeviceRotation()
     @State private var dvr = false
     @State private var isFullscreen = false
     @State private var logger: EventLogger?
@@ -135,13 +136,18 @@ struct LivePlayerDemo: View {
         .statusBarHidden(isFullscreen)
         .persistentSystemOverlays(isFullscreen ? .hidden : .automatic)
         .onChange(of: isFullscreen) { _, fs in OrientationLock.apply(fs ? .landscape : .portrait) }
+        // Physical rotation → enter/exit fullscreen.
+        .onChange(of: rotation.isLandscape) { _, landscape in
+            if landscape != isFullscreen { isFullscreen = landscape }
+        }
         .onChange(of: dvr) { _, _ in load() }
         .onAppear {
+            rotation.start()
             OrientationLock.apply(.all)
             if logger == nil { logger = attachEventLogging(player, to: log) }
             load()
         }
-        .onDisappear { player.pause(); OrientationLock.apply(.portrait) }
+        .onDisappear { player.pause(); rotation.stop(); OrientationLock.apply(.portrait) }
     }
 
     private func load() {

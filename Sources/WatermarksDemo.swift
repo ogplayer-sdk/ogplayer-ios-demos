@@ -10,6 +10,7 @@ private let watermarkStream = "https://media.ogplayer.tv/tos/master.m3u8"
 /// the controls; the built-in unlicensed "OGPlayer" mark stays until licensed.
 struct WatermarksDemo: View {
     @StateObject private var player = OGPlayer()
+    @StateObject private var rotation = DeviceRotation()
     @State private var isFullscreen = false
     @State private var enabled: Set<OverlaySlot> = [.topTrailing]
 
@@ -49,14 +50,19 @@ struct WatermarksDemo: View {
         .statusBarHidden(isFullscreen)
         .persistentSystemOverlays(isFullscreen ? .hidden : .automatic)
         .onChange(of: isFullscreen) { _, fs in OrientationLock.apply(fs ? .landscape : .portrait) }
+        // Physical rotation → enter/exit fullscreen.
+        .onChange(of: rotation.isLandscape) { _, landscape in
+            if landscape != isFullscreen { isFullscreen = landscape }
+        }
         .onAppear {
+            rotation.start()
             OrientationLock.apply(.all)
             if let item = OGMediaItem(urlString: watermarkStream, title: "Watermarks",
                    posterUrl: URL(string: "https://media.ogplayer.tv/posters/tos-mech.jpg")) {
                 player.load(item, autoplay: false)
             }
         }
-        .onDisappear { player.pause(); OrientationLock.apply(.portrait) }
+        .onDisappear { player.pause(); rotation.stop(); OrientationLock.apply(.portrait) }
     }
 
     private var controls: some View {

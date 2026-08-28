@@ -18,6 +18,7 @@ private final class MessageBox: @unchecked Sendable {
 
 struct ErrorMessagesDemo: View {
     @StateObject private var player = OGPlayer()
+    @StateObject private var rotation = DeviceRotation()
     @State private var isFullscreen = false
     @State private var message = ""
     /// Retry demo modes: the SDK button as-is, a relabeled one, or none at
@@ -62,13 +63,27 @@ struct ErrorMessagesDemo: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Ink.background.ignoresSafeArea())
+        .toolbar(isFullscreen ? .hidden : .visible, for: .navigationBar)
+        .statusBarHidden(isFullscreen)
+        .persistentSystemOverlays(isFullscreen ? .hidden : .automatic)
+        .onChange(of: isFullscreen) { _, fs in OrientationLock.apply(fs ? .landscape : .portrait) }
+        // Physical rotation → enter/exit fullscreen.
+        .onChange(of: rotation.isLandscape) { _, landscape in
+            if landscape != isFullscreen { isFullscreen = landscape }
+        }
         .onChange(of: retryMode) { _, _ in reload() }
         .onAppear {
+            rotation.start()
+            OrientationLock.apply(.all)
             box.text = message
             reload()
         }
         .onChange(of: message) { _, newValue in box.text = newValue }
-        .onDisappear { player.pause() }
+        .onDisappear {
+            player.pause()
+            rotation.stop()
+            OrientationLock.apply(.portrait)
+        }
     }
 
     /// 100% host-owned error UI for the "Custom overlay" mode — deliberately

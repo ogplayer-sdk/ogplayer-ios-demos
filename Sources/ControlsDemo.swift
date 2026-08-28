@@ -18,6 +18,7 @@ reload). Play/pause and the LIVE chip are always visible by SDK design.
 /// the running player instantly.
 struct ControlsDemo: View {
     @StateObject private var player = OGPlayer()
+    @StateObject private var rotation = DeviceRotation()
     @State private var isFullscreen = false
     @State private var hideAll = false
     @State private var liveContent = false
@@ -71,9 +72,13 @@ struct ControlsDemo: View {
         .onChange(of: isFullscreen) { _, fs in
             OrientationLock.apply(fs ? .landscape : .portrait)
         }
+        // Physical rotation → enter/exit fullscreen.
+        .onChange(of: rotation.isLandscape) { _, landscape in
+            if landscape != isFullscreen { isFullscreen = landscape }
+        }
         .onChange(of: liveContent) { _, _ in loadCurrent() }
-        .onAppear { OrientationLock.apply(.all); loadCurrent() }
-        .onDisappear { player.pause(); OrientationLock.apply(.portrait) }
+        .onAppear { rotation.start(); OrientationLock.apply(.all); loadCurrent() }
+        .onDisappear { player.pause(); rotation.stop(); OrientationLock.apply(.portrait) }
     }
 
     private func loadCurrent() {

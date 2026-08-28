@@ -45,6 +45,7 @@ private let sizeOptions: [(label: String, scale: Double)] =
 struct TracksDemo: View {
     @StateObject private var player = OGPlayer()
     @StateObject private var log = EventLogState()
+    @StateObject private var rotation = DeviceRotation()
     @State private var isFullscreen = false
     @State private var source: SubtitleDemoSource = .embedded
     @State private var volumeMode: VolumeControlMode = .device
@@ -82,6 +83,10 @@ struct TracksDemo: View {
         .statusBarHidden(isFullscreen)
         .persistentSystemOverlays(isFullscreen ? .hidden : .automatic)
         .onChange(of: isFullscreen) { _, fs in OrientationLock.apply(fs ? .landscape : .portrait) }
+        // Physical rotation → enter/exit fullscreen.
+        .onChange(of: rotation.isLandscape) { _, landscape in
+            if landscape != isFullscreen { isFullscreen = landscape }
+        }
         .onChange(of: source) { _, _ in load() }
         .onChange(of: player.subtitleTracks.count) { _, n in
             // Embedded subs are off by default — auto-select the first so the
@@ -94,12 +99,13 @@ struct TracksDemo: View {
             }
         }
         .onAppear {
+            rotation.start()
             OrientationLock.apply(.all)
             if logger == nil { logger = attachEventLogging(player, to: log, includeProgress: false) }
             player.subtitleTextScale = textScale
             load()
         }
-        .onDisappear { player.pause(); OrientationLock.apply(.portrait) }
+        .onDisappear { player.pause(); rotation.stop(); OrientationLock.apply(.portrait) }
     }
 
     private var controls: some View {
