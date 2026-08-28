@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ogplayer-sdk/ogplayer-swift",
       "state" : {
-        "revision" : "33fd24f1f4b0b074a6b3d0231fe6c254668839e1",
-        "version" : "1.0.1"
+        "revision" : "ae74785a8abedb928b512d4d04bc5f628a35ea6b",
+        "version" : "1.0.2"
       }
     },
     {
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googleads/swift-package-manager-google-interactive-media-ads-ios.git",
       "state" : {
-        "revision" : "fdf54991c74edc228b59592a44f33c564abafcc0",
-        "version" : "3.32.0"
+        "revision" : "d988839daa3f52912907611219fd0509c9553c49",
+        "version" : "3.33.0"
       }
     }
   ],

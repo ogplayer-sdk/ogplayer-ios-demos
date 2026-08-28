@@ -7,7 +7,7 @@ options:
 packages:
   OGPlayer:
     url: https://github.com/ogplayer-sdk/ogplayer-swift
-    from: 1.0.1
+    from: 1.0.2
 targets:
   OGPlayerDemos:
     type: application
