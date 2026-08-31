@@ -1,7 +1,7 @@
-// OGplayer FreeWheel adapter — ships as SOURCE, not as a package product.
+// OGPlayer FreeWheel adapter — ships as SOURCE, not as a package product.
 //
 // NOTE FOR DEVELOPERS: FreeWheel's AdManager SDK (AdManager.framework) is
-// licensed to FreeWheel customers, so OGplayer cannot bundle it — and Swift
+// licensed to FreeWheel customers, so OGPlayer cannot bundle it — and Swift
 // Package Manager cannot compile a target against a framework it isn't
 // allowed to ship (there is no `compileOnly` like on Android, where the
 // equivalent provider is the published `ogplayer-ads-freewheel` module).
@@ -24,7 +24,7 @@ import AVFoundation
 import AdManager
 import OGPlayerCore
 
-/// FreeWheel AdManager implementation of the OGplayer ads SPI.
+/// FreeWheel AdManager implementation of the OGPlayer ads SPI.
 ///
 /// Set it on the player and pass a `FreewheelConfig` as the item's ad breaks:
 ///
@@ -158,7 +158,13 @@ final class FWAdsProvider: NSObject, AdsProvider {
 
     func contentDidComplete() {
         adContext?.setVideoState(.completed)
-        guard currentSlot == nil, !postrollSlots.isEmpty else { return }
+        guard currentSlot == nil else { return }
+        guard !postrollSlots.isEmpty else {
+            // Nothing left to play — the schedule is settled (playlist
+            // advance and any host logic keyed on all-ads-completed).
+            callbacks?.onAllAdsCompleted()
+            return
+        }
         let slot = postrollSlots.removeFirst()
         play(slot: slot, breakType: .postroll)
     }
@@ -344,6 +350,8 @@ final class FWAdsProvider: NSObject, AdsProvider {
         case .postroll where !postrollSlots.isEmpty:
             play(slot: postrollSlots.removeFirst(), breakType: .postroll)
         default:
+            // The last postroll just finished — the schedule is settled.
+            if breakType == .postroll { callbacks?.onAllAdsCompleted() }
             callbacks?.onContentResumeRequested()
             adContext?.setVideoState(.playing)
         }

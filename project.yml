@@ -30,7 +30,7 @@ targets:
       path: Sources/Info.plist
       properties:
         UILaunchScreen: {}
-        CFBundleDisplayName: OGplayer Demos
+        CFBundleDisplayName: OGPlayer Demos
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
           - UIInterfaceOrientationLandscapeLeft
@@ -59,7 +59,7 @@ targets:
         CODE_SIGN_STYLE: Automatic
         # ---- FreeWheel (optional — bring your own SDK) -------------------
         # FreeWheel's AdManager.framework is licensed to FreeWheel customers
-        # and NOT bundled with OGplayer. To run the FreeWheel demo: copy your
+        # and NOT bundled with OGPlayer. To run the FreeWheel demo: copy your
         # AdManager.framework into PrivateFW/ (next to this file), uncomment
         # the two settings below AND the "Embed FreeWheel" build phase, then
         # run `xcodegen generate`. Device only — the framework ships no

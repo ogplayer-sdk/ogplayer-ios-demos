@@ -18,7 +18,7 @@ Requires iOS 18+ · Xcode 16+. For a physical device, select your signing
 team (Signing & Capabilities), or regenerate the project with
 `DEVELOPMENT_TEAM=<your team id> xcodegen generate`.
 
-Docs: https://ogplayer.tv/docs · Live web demo: https://ogplayer.tv
+Docs: https://ogplayer.tv/docs · Live web demo: https://demo.ogplayer.tv
 
 ## Notes
 

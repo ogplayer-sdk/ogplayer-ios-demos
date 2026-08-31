@@ -5,7 +5,7 @@ import OGPlayerUI
 /// FreeWheel demo — bring your own FreeWheel SDK.
 ///
 /// NOTE FOR DEVELOPERS: FreeWheel's AdManager SDK (`AdManager.framework`)
-/// is licensed to FreeWheel customers and is NOT bundled with OGplayer.
+/// is licensed to FreeWheel customers and is NOT bundled with OGPlayer.
 /// To run this demo (physical device only — the framework ships no
 /// simulator slice):
 ///

@@ -19,7 +19,7 @@ import OGPlayerCore
 ///
 /// Consent & identity parameters (`_fw_gdpr`, `_fw_gdpr_consent`,
 /// `_fw_did_idfa`, custom key-values…) are the app's responsibility and go
-/// into `globalParameters` verbatim — OGplayer never fabricates consent or
+/// into `globalParameters` verbatim — OGPlayer never fabricates consent or
 /// device identifiers. The provider adds only `pvrn`/`vprn` randomizers.
 enum DemoFwConfig {
 
