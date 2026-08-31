@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00FC74D1AA08A563A011ACE8 /* PipDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFAA116F6351285251975D7 /* PipDemo.swift */; };
 		0AC724E02DCCB9C4D2B8E8E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0A1A2FBFF99CD2F676E54A6 /* Assets.xcassets */; };
 		140ECE6E903C61823BEC4985 /* TracksDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7551AF66132A9638648481F /* TracksDemo.swift */; };
 		21CE33F93CC6AEAA1A96FBA8 /* EventLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0542EB0085A57A55B933C0D5 /* EventLog.swift */; };
 		2F1DE5011683FFCE2FDB9DF4 /* OrientationLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB0CA3E19553C63CF558C32 /* OrientationLock.swift */; };
+		408B793F70CF5CDD625ED6B5 /* DownloadsDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D332B1A921C57A187963848 /* DownloadsDemo.swift */; };
 		4428D30E4264429F86E03AD2 /* test_cue_settings.vtt in Resources */ = {isa = PBXBuildFile; fileRef = 741EEB9720D87FDE16613257 /* test_cue_settings.vtt */; };
 		4A2F3C667437BE63D09902A8 /* LauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398E3455C623AF57E960FAA /* LauncherView.swift */; };
 		4EE46311A8E7B37CEA5DB249 /* OGPlayerDemosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547E371CC1E31DF56E6D8B67 /* OGPlayerDemosApp.swift */; };
@@ -54,6 +56,7 @@
 		584947038D2CB1E39604D986 /* tears_of_steel_en.vtt */ = {isa = PBXFileReference; path = tears_of_steel_en.vtt; sourceTree = "<group>"; };
 		5C79964C69D58957B0C103A9 /* CustomActionsDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActionsDemo.swift; sourceTree = "<group>"; };
 		61C83964C90FA4F849C69AEE /* FreewheelDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreewheelDemo.swift; sourceTree = "<group>"; };
+		6D332B1A921C57A187963848 /* DownloadsDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsDemo.swift; sourceTree = "<group>"; };
 		741EEB9720D87FDE16613257 /* test_cue_settings.vtt */ = {isa = PBXFileReference; path = test_cue_settings.vtt; sourceTree = "<group>"; };
 		8127B01CB0C3B976400BD98A /* tears_of_steel_fr.vtt */ = {isa = PBXFileReference; path = tears_of_steel_fr.vtt; sourceTree = "<group>"; };
 		828BC6ED766B9B8A170A8AA3 /* DrmDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrmDemo.swift; sourceTree = "<group>"; };
@@ -64,6 +67,7 @@
 		CD1EDF98F291BC2AAE55E1A1 /* DemoCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoCatalog.swift; sourceTree = "<group>"; };
 		CD8FEEB926FCFD83F0AD9F88 /* DemoFwConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoFwConfig.swift; sourceTree = "<group>"; };
 		CDC3F49226591E7090344003 /* tears_of_steel_de.vtt */ = {isa = PBXFileReference; path = tears_of_steel_de.vtt; sourceTree = "<group>"; };
+		DDFAA116F6351285251975D7 /* PipDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipDemo.swift; sourceTree = "<group>"; };
 		E0A1A2FBFF99CD2F676E54A6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EDB0CA3E19553C63CF558C32 /* OrientationLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrientationLock.swift; sourceTree = "<group>"; };
 		F38C92F60208EE3382573468 /* AdsDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsDemo.swift; sourceTree = "<group>"; };
@@ -112,6 +116,7 @@
 				CD1EDF98F291BC2AAE55E1A1 /* DemoCatalog.swift */,
 				CD8FEEB926FCFD83F0AD9F88 /* DemoFwConfig.swift */,
 				B264E79B9509E3D1A6F85F19 /* DemoScreens.swift */,
+				6D332B1A921C57A187963848 /* DownloadsDemo.swift */,
 				828BC6ED766B9B8A170A8AA3 /* DrmDemo.swift */,
 				A7793AB56A9D4F2681B0FB2A /* ErrorMessagesDemo.swift */,
 				0542EB0085A57A55B933C0D5 /* EventLog.swift */,
@@ -120,6 +125,7 @@
 				5398E3455C623AF57E960FAA /* LauncherView.swift */,
 				547E371CC1E31DF56E6D8B67 /* OGPlayerDemosApp.swift */,
 				EDB0CA3E19553C63CF558C32 /* OrientationLock.swift */,
+				DDFAA116F6351285251975D7 /* PipDemo.swift */,
 				F7A862BBB7AD27AE563AB3F0 /* PlaylistDemo.swift */,
 				428D5E59D97F16846F1BE6FC /* RatingsDemo.swift */,
 				16A89A04096F6E9F91BDD495 /* StartFullscreenDemo.swift */,
@@ -234,6 +240,7 @@
 				FDED562D16F0E4DBB856D7BF /* DemoCatalog.swift in Sources */,
 				AAC8579AABCF7BFE1F65CD50 /* DemoFwConfig.swift in Sources */,
 				91478592B0055BE684166CC1 /* DemoScreens.swift in Sources */,
+				408B793F70CF5CDD625ED6B5 /* DownloadsDemo.swift in Sources */,
 				B565F96CFB5499EF2CC6D9D6 /* DrmDemo.swift in Sources */,
 				8917748FDF5807EBC40A26CF /* ErrorMessagesDemo.swift in Sources */,
 				21CE33F93CC6AEAA1A96FBA8 /* EventLog.swift in Sources */,
@@ -242,6 +249,7 @@
 				4A2F3C667437BE63D09902A8 /* LauncherView.swift in Sources */,
 				4EE46311A8E7B37CEA5DB249 /* OGPlayerDemosApp.swift in Sources */,
 				2F1DE5011683FFCE2FDB9DF4 /* OrientationLock.swift in Sources */,
+				00FC74D1AA08A563A011ACE8 /* PipDemo.swift in Sources */,
 				F890AB62871AC3A6083366BF /* PlaylistDemo.swift in Sources */,
 				9394EF249E9BCF895DC6BD15 /* RatingsDemo.swift in Sources */,
 				F0054E3B1F71192EB3552E07 /* StartFullscreenDemo.swift in Sources */,
@@ -446,7 +454,7 @@
 			repositoryURL = "https://github.com/ogplayer-sdk/ogplayer-swift";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.4;
+				minimumVersion = 1.1.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

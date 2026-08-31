@@ -1,3 +1,4 @@
+import OGPlayerCore
 import SwiftUI
 import UIKit
 
@@ -21,11 +22,21 @@ enum OrientationLock {
     }
 }
 
-/// Reports the app's currently-allowed orientations to UIKit.
+/// Reports the app's currently-allowed orientations to UIKit, and forwards
+/// background-download relaunch events to the SDK.
 final class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      supportedInterfaceOrientationsFor window: UIWindow?)
         -> UIInterfaceOrientationMask { OrientationLock.mask }
+
+    /// Downloads finished while the app wasn't running — hand the system's
+    /// completion handler to the SDK's background download session.
+    func application(_ application: UIApplication,
+                     handleEventsForBackgroundURLSession identifier: String,
+                     completionHandler: @escaping () -> Void) {
+        OGDownloadManager.handleBackgroundEvents(identifier: identifier,
+                                                 completionHandler: completionHandler)
+    }
 }
 
 /// Publishes the *physical* device orientation (from the sensor, independent

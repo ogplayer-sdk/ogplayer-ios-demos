@@ -7,7 +7,7 @@ options:
 packages:
   OGPlayer:
     url: https://github.com/ogplayer-sdk/ogplayer-swift
-    from: 1.0.4
+    from: 1.1.0
 
 targets:
   OGPlayerDemos:
@@ -37,6 +37,10 @@ targets:
           - UIInterfaceOrientationLandscapeRight
         NSAppTransportSecurity:
           NSAllowsArbitraryLoads: true
+        # PiP host requirement: playback (and the PiP window) survives
+        # backgrounding only with the audio background mode.
+        UIBackgroundModes:
+          - audio
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.ogplayer.demos

@@ -15,6 +15,7 @@ struct OGPlayerDemosApp: App {
             case "controls": ControlsDemo()
             case "customactions": CustomActionsDemo()
             case "drm": DrmDemo()
+            case "downloads": DownloadsDemo()
             case "ratings": RatingsDemo()
             case "tracks": TracksDemo()
             case "ads": AdsDemo()
