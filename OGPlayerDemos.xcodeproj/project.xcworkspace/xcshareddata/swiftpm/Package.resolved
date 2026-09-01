@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ogplayer-sdk/ogplayer-swift",
       "state" : {
-        "revision" : "e8f8fb5a1ae4afafbc09f6892a3aa708859cfb1f",
-        "version" : "1.1.0"
+        "revision" : "7192122acca3625c58dc7658adeda42d1f915589",
+        "version" : "1.1.1"
       }
     },
     {
