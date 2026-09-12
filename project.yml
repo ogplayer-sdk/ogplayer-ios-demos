@@ -7,7 +7,7 @@ options:
 packages:
   OGPlayer:
     url: https://github.com/ogplayer-sdk/ogplayer-swift
-    from: 1.2.0
+    from: 1.2.2
 
 targets:
   OGPlayerDemos:
@@ -45,8 +45,8 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.ogplayer.demos
         IPHONEOS_DEPLOYMENT_TARGET: "18.0"
-        MARKETING_VERSION: "1.2.0"
-        CURRENT_PROJECT_VERSION: "2"
+        MARKETING_VERSION: "1.2.2"
+        CURRENT_PROJECT_VERSION: "3"
         GENERATE_INFOPLIST_FILE: NO
         TARGETED_DEVICE_FAMILY: "1,2"
         # Brand app icon: black ground, small OGPlayer mark centered

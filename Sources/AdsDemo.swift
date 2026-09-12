@@ -38,6 +38,16 @@ struct AdsDemo: View {
         }
     }
 
+    /// Progressive MP4: one audio track, no text tracks, no ladder — buttons
+    /// that would open an empty menu are hidden.
+    private var adsConfig: OGUIConfig {
+        var c = OGUIConfig()
+        c.showSubtitleButton = false
+        c.showAudioTrackButton = false
+        c.showQualityButton = false
+        return c
+    }
+
     var body: some View {
         // ONE OGPlayerView (never a second instance) so its ad container
         // survives fullscreen/rotation. Fullscreen is driven by isFullscreen
@@ -45,7 +55,7 @@ struct AdsDemo: View {
         GeometryReader { geo in
             VStack(spacing: 0) {
                 OGPlayerView(player: player, isFullscreen: $isFullscreen,
-                             autoFullscreenOnRotate: true)
+                             config: adsConfig, autoFullscreenOnRotate: true)
                     .frame(maxWidth: .infinity)
                     .frame(height: isFullscreen ? geo.size.height : geo.size.width * 9 / 16)
                 if !isFullscreen {
@@ -83,7 +93,10 @@ struct AdsDemo: View {
         VStack(alignment: .leading, spacing: 10) {
             Text("Client-side Google IMA ads. Pick a scenario to reload; ad callbacks "
                  + "stream below. IMA renders its own skip / Learn More UI, and the SDK "
-                 + "hides its overlays during the break.")
+                 + "hides its overlays during the break. The clip is a progressive MP4 "
+                 + "with one audio track, no subtitles and no quality ladder, so those "
+                 + "three buttons are hidden (showSubtitleButton / showAudioTrackButton "
+                 + "/ showQualityButton = false).")
                 .font(.system(size: 12)).foregroundStyle(Ink.description)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {

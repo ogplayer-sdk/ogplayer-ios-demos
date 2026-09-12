@@ -32,9 +32,18 @@ struct DrmDemo: View {
     @State private var logger: EventLogger?
 
     /// DRM demo config: no AirPlay button (not relevant to this scenario).
+    /// The ezdrm stream is a single media playlist — one audio track, no
+    /// subtitles, no ladder — so the buttons that would open an empty menu
+    /// are hidden; the Axinom stream (three audio languages, three subtitle
+    /// languages, five variants) shows everything.
     private var drmConfig: OGUIConfig {
         var c = OGUIConfig()
         c.showAirPlayButton = false
+        if stream != .multiDrm {
+            c.showSubtitleButton = false
+            c.showAudioTrackButton = false
+            c.showQualityButton = false
+        }
         return c
     }
 
@@ -57,7 +66,10 @@ struct DrmDemo: View {
                         Text("FairPlay Streaming — EZDRM public test asset. The SDK fetches "
                              + "the app certificate, builds the SPC, calls the KSM and installs "
                              + "the CKC via AVContentKeySession. The token chip adds a per-request "
-                             + "tokenProvider — watch it log on every license call.")
+                             + "tokenProvider — watch it log on every license call. The ezdrm "
+                             + "stream is a single media playlist with one audio track and no "
+                             + "subtitles, so its subtitle, audio and quality buttons are hidden; "
+                             + "the Axinom stream has three of each and shows them.")
                             .font(.system(size: 12)).foregroundStyle(Ink.description)
                         Text("Requires a real device — FairPlay keys don't work on the Simulator.")
                             .font(.system(size: 11, weight: .semibold)).foregroundStyle(Ink.accent)

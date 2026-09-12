@@ -88,9 +88,14 @@ struct LivePlayerDemo: View {
     @State private var logger: EventLogger?
 
     /// Live demo config: no AirPlay button (not relevant to this scenario).
+    /// One audio language and no subtitles — the subtitle and audio buttons
+    /// would open empty menus, so they are hidden; the quality ladder stays.
     private var liveConfig: OGUIConfig {
         var c = OGUIConfig()
         c.showAirPlayButton = false
+        c.showSubtitleButton = false
+        c.showAudioTrackButton = false
+        c.showSpeedButton = false
         return c
     }
 
@@ -118,9 +123,10 @@ struct LivePlayerDemo: View {
                                 .buttonStyle(.bordered)
                                 .tint(Ink.accent)
                         }
-                        Text(dvr
+                        Text((dvr
                              ? "LIVE_DVR — scrub behind the edge, then tap the LIVE chip or \u{201C}To live edge\u{201D} (seekToLiveEdge()) to jump back. The label reads LIVE at the edge, else a −offset; the thumb creeps toward live as you watch behind it."
                              : "LIVE — no seeking: no progress bar, the chip stays at the edge.")
+                             + " One audio language and no subtitles: the subtitle and audio buttons are hidden (showSubtitleButton / showAudioTrackButton = false); speed goes too — no rate changes at the live edge (showSpeedButton = false).")
                             .font(.system(size: 12)).foregroundStyle(Ink.description)
                     }
                     .padding(16)

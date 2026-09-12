@@ -31,6 +31,15 @@ struct ErrorMessagesDemo: View {
     private var config: OGUIConfig {
         var c = OGUIConfig()
         c.showRetryButton = retryMode != 2
+        // The stream never loads: seeking, rate, tracks and the timeline have
+        // nothing to act on, so those controls are hidden.
+        c.showSeekButtons = false
+        c.showProgressBar = false
+        c.showTimeLabels = false
+        c.showSpeedButton = false
+        c.showQualityButton = false
+        c.showAudioTrackButton = false
+        c.showSubtitleButton = false
         if retryMode == 1 { c.retryButtonLabel = "Probeer opnieuw" }
         let box = box
         c.errorMessageProvider = { error in
@@ -153,7 +162,8 @@ struct ErrorMessagesDemo: View {
                     + "button, your text, any language."
                 : "This screen loads a missing stream URL, so it always fails — your "
                     + "text (any language) replaces the SDK's default error overlay "
-                    + "via errorMessageProvider.")
+                    + "via errorMessageProvider. Nothing plays here, so the seek, "
+                    + "timeline, speed and track controls are hidden.")
                 .font(.footnote)
                 .foregroundColor(Ink.description)
                 .frame(maxWidth: .infinity, alignment: .leading)

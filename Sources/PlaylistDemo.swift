@@ -74,6 +74,11 @@ struct PlaylistDemo: View {
 
     private var config: OGUIConfig {
         var c = OGUIConfig()
+        // Progressive MP4 clips: one audio track, no subtitles, no ladder —
+        // buttons that would open an empty menu are hidden in every mode.
+        c.showSubtitleButton = false
+        c.showAudioTrackButton = false
+        c.showQualityButton = false
         switch mode {
         case 1:
             c.upNextLeadSeconds = 5
@@ -168,6 +173,12 @@ struct PlaylistDemo: View {
     }
 
     private var explainer: String {
+        modeExplainer
+            + " The clips are progressive MP4s with one audio track, no subtitles "
+            + "and no ladder, so the subtitle, audio and quality buttons are hidden."
+    }
+
+    private var modeExplainer: String {
         switch mode {
         case 1:
             return "upNextLeadSeconds = 5 — the card appears 5 seconds before "
