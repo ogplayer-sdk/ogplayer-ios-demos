@@ -1,0 +1,21 @@
+# Read-only mirror: auto-close pull requests with a pointer to email.
+name: lockdown
+on:
+  pull_request_target:
+    types: [opened, reopened]
+permissions:
+  pull-requests: write
+jobs:
+  close:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              ...context.repo, issue_number: context.payload.pull_request.number,
+              body: "Thanks for your interest! This repository is a read-only mirror of the OGPlayer demo app and does not accept pull requests. Feedback and questions: hello@ogplayer.tv"
+            });
+            await github.rest.pulls.update({
+              ...context.repo, pull_number: context.payload.pull_request.number, state: "closed"
+            });
