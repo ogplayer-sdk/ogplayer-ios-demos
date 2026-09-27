@@ -1,0 +1,38 @@
+WEBVTT - Cue settings test file
+
+00:00:00.000 --> 00:00:05.000
+Default position (bottom, centered) — no cue settings
+
+00:00:05.000 --> 00:00:10.000 line:10%
+line:10% — subtitle near the top of the screen
+
+00:00:10.000 --> 00:00:15.000 line:50%
+line:50% — subtitle in the middle of the screen
+
+00:00:15.000 --> 00:00:20.000 line:0
+line:0 — first line from the top (line number, not percentage)
+
+00:00:20.000 --> 00:00:25.000 line:-3
+line:-3 — third line from the bottom
+
+00:00:25.000 --> 00:00:30.000 position:10% align:start size:35%
+position:10% align:start size:35% — left-aligned, narrow box
+
+00:00:30.000 --> 00:00:35.000 position:90% align:end size:35%
+position:90% align:end size:35% — right-aligned
+
+00:00:35.000 --> 00:00:40.000 line:20% position:20% align:start size:40%
+Combo: top-left (line + position + align + size)
+
+00:00:40.000 --> 00:00:45.000 line:20% position:80% align:end size:40%
+Combo: top-right
+
+00:00:45.000 --> 00:00:50.000 vertical:rl line:10%
+vertical:rl — vertical writing, right to left
+
+00:00:50.000 --> 00:00:55.000 line:40%
+Two-line cue in the middle —
+second line of text
+
+00:00:55.000 --> 00:01:00.000 line:80% align:center
+<b>Bold</b>, <i>italic</i> and <u>underline</u> tags with line:80%

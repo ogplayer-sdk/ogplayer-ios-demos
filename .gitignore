@@ -1,0 +1,8 @@
+.DS_Store
+build/
+build-device/
+xcuserdata/
+*.xcuserstate
+
+build-tv/
+build-ios-check/
